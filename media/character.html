@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta http-equiv="Content-Security-Policy"
+        content="default-src 'none';
+                 style-src {{CSP_SOURCE}} 'unsafe-inline';
+                 script-src {{CSP_SOURCE}} 'unsafe-inline';"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>CodeMate</title>
+  <link rel="stylesheet" href="{{CSS_URI}}"/>
+</head>
+<body>
+  <div id="codemate-root" class="size-medium">
+    <svg id="face" xmlns="http://www.w3.org/2000/svg"
+         viewBox="0 0 160 160"
+         aria-label="CodeMate face" role="img">
+
+      <defs>
+        <filter id="glow" x="-40%" y="-40%" width="180%" height="180%">
+          <feGaussianBlur stdDeviation="2.5" result="blur"/>
+          <feMerge>
+            <feMergeNode in="blur"/>
+            <feMergeNode in="SourceGraphic"/>
+          </feMerge>
+        </filter>
+        <radialGradient id="face-blend" cx="50%" cy="44%" r="58%">
+          <stop offset="0%" stop-color="var(--face-fill)" stop-opacity="0.14"/>
+          <stop offset="62%" stop-color="var(--face-fill)" stop-opacity="0.05"/>
+          <stop offset="100%" stop-color="var(--face-fill)" stop-opacity="0"/>
+        </radialGradient>
+      </defs>
+
+      <circle id="head" cx="80" cy="80" r="78" fill="url(#face-blend)"/>
+
+      <!-- Eyes: outer translate is position; inner .eye group is CSS-scaled for blinks -->
+      <g transform="translate(52,68)">
+        <g id="eye-left" class="eye">
+          <ellipse id="sclera-left" cx="0" cy="0" rx="16" ry="18"/>
+          <ellipse id="pupil-left"  cx="0" cy="1.5" rx="6.5" ry="7.5"/>
+          <circle class="eye-shine" cx="-4" cy="-5" r="3" fill="#fff" opacity="0.55"/>
+        </g>
+      </g>
+      <g transform="translate(108,68)">
+        <g id="eye-right" class="eye">
+          <ellipse id="sclera-right" cx="0" cy="0" rx="16" ry="18"/>
+          <ellipse id="pupil-right"  cx="0" cy="1.5" rx="6.5" ry="7.5"/>
+          <circle class="eye-shine" cx="-4" cy="-5" r="3" fill="#fff" opacity="0.55"/>
+        </g>
+      </g>
+
+      <path id="mouth" d="M 58 108 Q 80 120 102 108"
+            fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+  </div>
+  <script src="{{JS_URI}}"></script>
+</body>
+</html>

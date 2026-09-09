@@ -1,0 +1,88 @@
+{
+  "name": "codemate",
+  "displayName": "CodeMate",
+  "description": "A minimal animated face that reacts to editor events.",
+  "version": "0.0.1",
+  "publisher": "your-name",
+  "engines": {
+    "vscode": "^1.95.0"
+  },
+  "categories": ["Other"],
+  "activationEvents": ["onStartupFinished"],
+  "main": "./out/extension.js",
+  "scripts": {
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "vscode:prepublish": "npm run compile"
+  },
+  "contributes": {
+    "configuration": {
+      "type": "object",
+      "title": "CodeMate Settings",
+      "properties": {
+        "codemate.theme": {
+          "type": "string",
+          "enum": ["Classic", "Neon", "Pastel", "Retro Pixel", "Minimal Mono", "custom"],
+          "default": "Classic",
+          "description": "Select the face theme."
+        },
+        "codemate.size": {
+          "type": "string",
+          "enum": ["small", "medium", "large"],
+          "default": "medium",
+          "description": "Size of the character."
+        },
+        "codemate.position": {
+          "type": "string",
+          "enum": ["top-left", "top-right", "bottom-left", "bottom-right", "draggable"],
+          "default": "bottom-right",
+          "description": "Screen corner where the face appears."
+        },
+        "codemate.reactionIntensity": {
+          "type": "string",
+          "enum": ["off", "subtle", "normal", "playful"],
+          "default": "normal",
+          "description": "Intensity of reactions."
+        },
+        "codemate.customColors": {
+          "type": "object",
+          "default": {},
+          "description": "Custom colors when theme is set to custom.",
+          "properties": {
+            "eyeColor": {"type":"string","description":"Eye color"},
+            "mouthColor": {"type":"string","description":"Mouth color"},
+            "backgroundColor": {"type":"string","description":"Background color"}
+          }
+        },
+        "codemate.enableErrorReaction": {"type":"boolean","default":true,"description":"React to diagnostics errors."},
+        "codemate.enableIdleReaction": {"type":"boolean","default":true,"description":"React when idle."},
+        "codemate.enableSaveReaction": {"type":"boolean","default":true,"description":"React on file save."},
+        "codemate.enableDebugReaction": {"type":"boolean","default":true,"description":"React on debugger events."},
+        "codemate.enableTypingBurstReaction": {"type":"boolean","default":true,"description":"React on fast typing bursts."}
+      }
+    },
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "codemateContainer",
+          "title": "CodeMate",
+          "icon": "media/icon.svg"
+        }
+      ]
+    },
+    "views": {
+      "codemateContainer": [
+        {
+          "type": "webview",
+          "id": "codemateView",
+          "name": "CodeMate Face"
+        }
+      ]
+    }
+  },
+  "devDependencies": {
+    "@types/vscode": "^1.95.0",
+    "typescript": "^5.5.4",
+    "vscode-test": "^2.0.0"
+  }
+}

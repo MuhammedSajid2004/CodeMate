@@ -1,0 +1,158 @@
+/* ─────────────────────────────────────────────────────────────────────────────
+   character.css  ·  CodeMate – webview styles
+   ───────────────────────────────────────────────────────────────────────────── */
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body {
+  width: 100%;
+  height: 100%;
+  background: transparent;
+  overflow: hidden;
+}
+
+#codemate-root {
+  position: fixed;
+  bottom: 12px;
+  right: 12px;
+  z-index: 9999;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+#codemate-root.draggable { cursor: grab; }
+#codemate-root.draggable:active { cursor: grabbing; }
+
+#face { display: block; overflow: visible; }
+
+#codemate-root.size-small  #face { width: 76px;  height: 76px; }
+#codemate-root.size-medium #face { width: 118px; height: 118px; }
+#codemate-root.size-large  #face { width: 156px; height: 156px; }
+
+:root {
+  --eye-color:         #222222;
+  --sclera-color:      #ffffff;
+  --eye-outline-color: transparent;
+  --mouth-color:       #222222;
+  --bg-color:          transparent;
+  --face-fill:         var(--vscode-foreground, #cccccc);
+  --stroke-width:      2.4px;
+  --glow:              none;
+}
+
+#head {
+  stroke: none;
+  pointer-events: none;
+}
+
+.eye {
+  transform-box: fill-box;
+  transform-origin: 50% 55%;
+  transition: transform 90ms ease-in;
+}
+
+.eye ellipse[id^="sclera"] {
+  fill: var(--sclera-color);
+  stroke: var(--eye-outline-color);
+  stroke-width: 0;
+  transition: fill 250ms ease;
+}
+
+.eye ellipse[id^="pupil"] {
+  fill: var(--eye-color);
+  transition: cx 180ms ease, cy 180ms ease, fill 250ms ease;
+}
+
+.eye.closed { transform: scaleY(0.08); }
+.eye.sleepy { transform: scaleY(0.32); }
+.eye.wink   { transform: scaleY(0.08); }
+
+#mouth {
+  stroke: var(--mouth-color);
+  stroke-width: var(--stroke-width);
+  fill: none;
+  transition: stroke 250ms ease;
+}
+
+#face.pixel-style {
+  image-rendering: pixelated;
+  shape-rendering: crispEdges;
+}
+#face.pixel-style .eye ellipse,
+#face.pixel-style #mouth {
+  stroke-width: 3;
+}
+#face.pixel-style .eye-shine { display: none; }
+
+@keyframes bounce {
+  0%   { transform: translateY(0); }
+  30%  { transform: translateY(-8px); }
+  55%  { transform: translateY(-3px); }
+  75%  { transform: translateY(-6px); }
+  100% { transform: translateY(0); }
+}
+#codemate-root.bouncing #face { animation: bounce 0.55s ease forwards; }
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  20%       { transform: translateX(-4px); }
+  40%       { transform: translateX(4px); }
+  60%       { transform: translateX(-3px); }
+  80%       { transform: translateX(3px); }
+}
+#codemate-root.shaking #face { animation: shake 0.4s ease forwards; }
+
+@keyframes pulse {
+  0%   { transform: scale(1); }
+  40%  { transform: scale(1.1); }
+  100% { transform: scale(1); }
+}
+#codemate-root.pulsing #face { animation: pulse 0.35s ease forwards; }
+
+@keyframes nod {
+  0%   { transform: translateY(0); }
+  35%  { transform: translateY(7px); }
+  70%  { transform: translateY(-2px); }
+  100% { transform: translateY(0); }
+}
+#codemate-root.nodding #face { animation: nod 0.42s ease forwards; }
+
+@keyframes writing {
+  0%, 100% { transform: translateY(0); }
+  50%       { transform: translateY(1.5px); }
+}
+#codemate-root.writing #face { animation: writing 0.28s ease-in-out infinite; }
+
+@keyframes glance {
+  0%, 100% { transform: translateX(0); }
+  40%       { transform: translateX(5px); }
+}
+#codemate-root.glancing #face { animation: glance 0.45s ease forwards; }
+
+@keyframes sleepyBreath {
+  0%, 100% { transform: scale(1);    opacity: 1; }
+  50%       { transform: scale(0.97); opacity: 0.88; }
+}
+#codemate-root.sleepy #face { animation: sleepyBreath 3s ease-in-out infinite; }
+
+@keyframes dizzy {
+  0%   { transform: rotate(0deg); }
+  25%  { transform: rotate(-8deg); }
+  50%  { transform: rotate(8deg); }
+  75%  { transform: rotate(-4deg); }
+  100% { transform: rotate(0deg); }
+}
+#codemate-root.dizzy #face { animation: dizzy 0.55s ease forwards; }
+
+@keyframes peek {
+  0%, 100% { transform: translateX(0); }
+  25%       { transform: translateX(-6px); }
+  75%       { transform: translateX(6px); }
+}
+#codemate-root.peeking #face { animation: peek 0.7s ease forwards; }
+
+@keyframes tilt {
+  0%, 100% { transform: rotate(0deg); }
+  40%       { transform: rotate(-6deg); }
+}
+#codemate-root.tilting #face { animation: tilt 0.4s ease forwards; }

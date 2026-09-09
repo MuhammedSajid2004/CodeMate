@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none">
+  <!-- Left eye -->
+  <ellipse cx="8" cy="10" rx="3.5" ry="4" fill="currentColor" opacity="0.9"/>
+  <!-- Right eye -->
+  <ellipse cx="16" cy="10" rx="3.5" ry="4" fill="currentColor" opacity="0.9"/>
+  <!-- Smile mouth -->
+  <path d="M 7 17 Q 12 21 17 17" stroke="currentColor" stroke-width="1.8"
+        stroke-linecap="round" fill="none"/>
+</svg>
