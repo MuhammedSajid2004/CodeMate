@@ -1,145 +1,133 @@
-# CodeMate 
+# CodeMate
 
-> A tiny, friendly animated face that lives in your VS Code sidebar and reacts to what you're doing.
+A small animated face for VS Code that sits in the sidebar and reacts while you work.
 
-**No body. No pet. No gimmicks.** Just two eyes and a mouth, floating in the corner of your editor.
+The face is a soft circle that blends into the panel — eyes and a mouth only, no robot chrome or hard borders. It blinks on its own, looks around, and changes expression as you type, save, debug, and hit errors.
 
 ---
 
 ## Features
 
-| What it does | How it looks |
-|---|---|
-| Idle blinking every 3–6 s | Smooth eyelid animation |
-| Typing steadily | Eyes shift slightly, flat mouth |
-| Fast typing burst | Wide eyes, surprised mouth, pulse bounce |
-| New error in Problems panel | Concerned squiggle mouth + shake |
-| All errors cleared | Big smile + bounce |
-| File saved | Smirk + wink |
-| Debugger breakpoint | Surprised "O" mouth |
-| Long idle (2 min) | Half-closed sleepy eyes + breathing |
+- **Minimal face** — circular, borderless, eyes + mouth only
+- **Live reactions** to editor events
+- **Themes** — Classic, Neon, Pastel, Retro Pixel, Minimal Mono, or custom colors
+- **Size & placement** — small / medium / large, plus corner or draggable position
+- **Idle sleepy mode** after two minutes without edits
 
-### Themes
+### What it reacts to
 
-| Theme | Description |
-|---|---|
-| **Classic** | Black eyes, line mouth, transparent background |
-| **Neon** | Cyan eyes, pink mouth, dark glow |
-| **Pastel** | Soft purple/pink, rounded shapes |
-| **Retro Pixel** | Green on black, pixel-art rendering |
-| **Minimal Mono** | Matches VS Code's foreground colour automatically |
-| **custom** | Define your own colours in settings |
+| You do this | The face does this |
+| --- | --- |
+| Type | Concentrated look, light bob |
+| Type fast / paste a lot | Surprised pulse |
+| Enter | Nod |
+| Tab / indent | Glance aside, smirk |
+| Backspace | Quick frown |
+| Paste | Wide-eyed pulse |
+| Cut | Tilt + frown |
+| Undo | Dizzy wobble |
+| Redo | Determined nod |
+| Comment (`//`, `/*`, `--`, `# `) | Smirk + wink |
+| Format document | Short “chew” pulse |
+| Switch file | Eyes peek left then right |
+| Save | Wink |
+| Errors appear | Shake, wavy mouth |
+| Errors clear | Bounce, big smile |
+| Breakpoint / debug start | Surprised stare |
+| Debug session ends | Bounce + smile |
+| Idle (~2 min) | Sleepy lids, occasional yawn |
 
 ---
 
-## Installation & Running in Extension Development Host
+## Requirements
 
-### Prerequisites
+- [Visual Studio Code](https://code.visualstudio.com/) `1.95.0` or later
+- [Node.js](https://nodejs.org/) (to compile from source)
 
-- [Node.js](https://nodejs.org/) 18+
-- [VS Code](https://code.visualstudio.com/) 1.95+
+This is an unpublished local extension. Load it in the Extension Development Host to try it.
 
-### Steps
+---
+
+## Run from source
 
 ```bash
-# 1. Clone / open the project folder
-cd "C:/Users/Muhammed Sajid/Documents/Projects/CodeMate"
-
-# 2. Install dependencies
+git clone https://github.com/MuhammedSajid2004/CodeMate.git
+cd CodeMate
 npm install
-
-# 3. Compile TypeScript
 npm run compile
-# or watch mode
+```
+
+Then in VS Code:
+
+1. Open this folder
+2. Press **F5** (`Run Extension`)
+3. In the new window, open the **CodeMate** icon in the activity bar
+
+`watch` mode while developing:
+
+```bash
 npm run watch
-
-# 4. Press F5 in VS Code (or Run → Start Debugging)
-#    This opens a new Extension Development Host window.
-
-# 5. In the Host window, open the CodeMate panel:
-#    Click the 👁️ face icon in the Activity Bar on the left.
 ```
 
 ---
 
 ## Settings
 
-Open **Settings** (`Ctrl+,`) and search for **CodeMate**:
+Search **CodeMate** in Settings, or edit `settings.json`:
 
-| Setting | Default | Description |
-|---|---|---|
-| `codemate.theme` | `Classic` | Select a preset or `custom` |
-| `codemate.size` | `medium` | `small` / `medium` / `large` |
-| `codemate.position` | `bottom-right` | Which corner the face sits in |
-| `codemate.reactionIntensity` | `normal` | `off` / `subtle` / `normal` / `playful` |
-| `codemate.customColors` | `{}` | `eyeColor`, `mouthColor`, `backgroundColor` |
-| `codemate.enableErrorReaction` | `true` | Toggle error reactions |
-| `codemate.enableIdleReaction` | `true` | Toggle idle/sleep |
-| `codemate.enableSaveReaction` | `true` | Toggle save wink |
-| `codemate.enableDebugReaction` | `true` | Toggle debug reactions |
-| `codemate.enableTypingBurstReaction` | `true` | Toggle burst detection |
+| Setting | Default | What it does |
+| --- | --- | --- |
+| `codemate.theme` | `"Classic"` | `Classic`, `Neon`, `Pastel`, `Retro Pixel`, `Minimal Mono`, `custom` |
+| `codemate.size` | `"medium"` | `small`, `medium`, `large` |
+| `codemate.position` | `"bottom-right"` | Corner, or `draggable` |
+| `codemate.reactionIntensity` | `"normal"` | `off`, `subtle`, `normal`, `playful` |
+| `codemate.customColors` | `{}` | `eyeColor`, `mouthColor`, `backgroundColor` when theme is `custom` |
+| `codemate.enableErrorReaction` | `true` | React to diagnostics |
+| `codemate.enableIdleReaction` | `true` | Sleepy after idle |
+| `codemate.enableSaveReaction` | `true` | Wink on save |
+| `codemate.enableDebugReaction` | `true` | React to debug events |
+| `codemate.enableTypingBurstReaction` | `true` | Extra reaction for fast typing |
 
-All settings update the face **live** without requiring a reload.
-
----
-
-## Adding a Custom Theme
-
-Themes are defined in [`src/themes.ts`](src/themes.ts). To add a new one:
-
-### 1. Add a preset object
-
-```typescript
-// src/themes.ts
-export const themes: Record<string, Theme> = {
-  // … existing themes …
-
-  'Cyber Punk': {
-    name: 'Cyber Punk',
-    eyeColor: '#ff2d78',
-    scleraColor: '#1a001a',
-    eyeOutlineColor: '#ff2d78',
-    mouthColor: '#ffe600',
-    backgroundColor: 'transparent',
-    glow: '0 0 10px #ff2d78, 0 0 20px #ff2d78',
-    strokeWidth: 2.5,
-  },
-};
-```
-
-### 2. Register the enum value in `package.json`
+Example:
 
 ```json
-"codemate.theme": {
-  "enum": ["Classic", "Neon", "Pastel", "Retro Pixel", "Minimal Mono", "Cyber Punk", "custom"]
+{
+  "codemate.theme": "Neon",
+  "codemate.size": "medium",
+  "codemate.position": "bottom-right"
 }
 ```
 
-### 3. Recompile (`npm run compile`) and reload the Extension Host.
+---
 
-That's it — the theme is now selectable from Settings.
+## Themes
+
+| Theme | Look |
+| --- | --- |
+| **Classic** | Dark eyes and mouth on a soft circle |
+| **Neon** | Cyan / magenta glow |
+| **Pastel** | Soft purple and pink |
+| **Retro Pixel** | Blocky green-on-black |
+| **Minimal Mono** | Follows the VS Code foreground color |
+| **custom** | Your own `codemate.customColors` |
 
 ---
 
-## Project Structure
+## Project layout
 
 ```
 CodeMate/
-├── media/
-│   ├── character.html   # Webview HTML template
-│   ├── character.css    # All styles & keyframe animations
-│   ├── character.js     # Expression state machine + message handler
-│   └── icon.svg         # Activity bar icon
 ├── src/
-│   ├── extension.ts             # Activation, event listeners
-│   ├── CodeMateViewProvider.ts  # WebviewViewProvider
-│   ├── themes.ts                # Theme preset definitions
-│   └── types.ts                 # Shared TypeScript types
-├── package.json
-└── tsconfig.json
+│   ├── extension.ts            # Editor event listeners
+│   ├── CodeMateViewProvider.ts # Sidebar webview
+│   ├── themes.ts               # Theme presets
+│   └── types.ts                # Shared types
+├── media/
+│   ├── character.html          # Face SVG
+│   ├── character.css           # Layout + motion
+│   ├── character.js            # Expression state machine
+│   └── icon.svg                # Activity bar icon
+└── package.json
 ```
 
 ---
-
-## License
-
