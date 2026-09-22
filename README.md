@@ -1,4 +1,4 @@
-# CodeMate
+# CodeMate Project
 
 A small animated face for VS Code that sits in the sidebar and reacts while you work.
 
