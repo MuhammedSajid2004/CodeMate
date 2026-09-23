@@ -1,4 +1,4 @@
-# CodeMate 
+# CodeMate(Interactive Coding Buddy)
 
 A small animated face for VS Code that sits in the sidebar and reacts while you work.
 
