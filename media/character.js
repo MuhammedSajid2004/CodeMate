@@ -2,6 +2,7 @@
 // character.js  ·  CodeMate – webview-side rendering & expression state machine
 // Runs entirely inside the VS Code WebviewView context (no module system).
 // ─────────────────────────────────────────────────────────────────────────────
+// 
 
 (function () {
   'use strict';
