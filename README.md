@@ -1,5 +1,5 @@
 # CodeMate
-hi
+
 A small animated face for VS Code that sits in the sidebar and reacts while you work.
 
 The face is a soft circle that blends into the panel — eyes and a mouth only, no robot chrome or hard borders. It blinks on its own, looks around, and changes expression as you type, save, debug, and hit errors.
